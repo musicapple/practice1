@@ -9,6 +9,7 @@ public class Main {
     }
 }
 
+
 @FunctionalInterface
 interface StringLengthCalculator {
     int getLength(String str);
