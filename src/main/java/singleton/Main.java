@@ -1,4 +1,4 @@
-package practice1;
+package singleton;
 
 public class Main {
 
