@@ -1,4 +1,4 @@
-package lambda3;
+package lambda.lambda3;
 
 public class Main {
 
