@@ -56,5 +56,6 @@ import java.util.Scanner;
                 }
             }
         }
+        // 방법 3
     }
 }
