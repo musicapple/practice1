@@ -17,6 +17,7 @@ import java.util.Scanner;
     }
     private final Scanner sc;
     User user = null;
+    UserDataManager manager = UserDataManager.getInstance();
 
     private Main(){
         sc = new Scanner(System.in);
@@ -57,10 +58,32 @@ import java.util.Scanner;
 
     }
     // 로그인 성공하면 멤버 변수 user에 해당 유저 대입
-    private void login(){}
+    private void login(){
+        System.out.print("id: ");
+        String id = sc.next();
+        System.out.print("pw: ");
+        String pw = sc.next();
+        if(!manager.isMember(id)){
+            System.out.println("회원이 아닙니다.");
+        }else{
+            if(manager.getUser(id).getPw().equals(pw)){
+                System.out.println(manager.getUser(id).getId()+"님 환영합니다!");
+                user = manager.getUser(id);
+            }else {
+                System.out.println("비밀번호가 틀렸습니다 ㅠ");
+            }
+        }
+    }
 
     // 멤버 변수의 user를 null값으로 대입
-    private void register(){}
+    private void register(){
+        System.out.println("id: ");
+        String id = sc.next();
+        System.out.print("pw: ");
+        String pw = sc.next();
+        manager.register(id,pw);
+        System.out.println("회원이 등록되었습니다!!");
+    }
 
     // 회원가입 할 때, 비밀번호를 두 번 입력받음
     private void logout() {}

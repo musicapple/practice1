@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-//      SingletonExample se = new SingletonExample();   // 객체 생성 요청
+//
 
         SingletonExample ex1 = SingletonExample.getInstance();
         SingletonExample ex2 = SingletonExample.getInstance();
