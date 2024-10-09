@@ -1,5 +1,6 @@
 package sign_up;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /*
@@ -12,50 +13,58 @@ import java.util.Scanner;
  public class Main {
 
     public static void main(String[] args) {
-
-/*
-        방법 1
-
-        UserDataManager manager = UserDataManager.getInstance();
-
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            String id = sc.next();
-            String pw = sc.next();
-
-            if (!manager.isMember(id)) {
-                manager.register(id, pw);
-                System.out.println("멤버가 아니여서 등록하였습니다.");
-            } else if (manager.isMember(id) && manager.getUser(id).getPw().equals(pw)) {
-                System.out.println("로그인 성공!");
-                break;
-            } else if (manager.isMember(id) && !manager.getUser(id).getPw().equals(id)) {
-                System.out.println("비밀번호가 다릅니다.");
-                break;
-            }
-        }*/
-
-        // 방법 2
-        UserDataManager manager = UserDataManager.getInstance();
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            System.out.print("ID: ");
-            String id = sc.next();
-            System.out.print("PW: ");
-            String pw = sc.next();
-
-            if (!manager.isMember(id)) {
-                manager.register(id, pw);
-                System.out.println("멤버가 아니여서 등록하였습니다.");
-            } else {
-                User user = manager.getUser(id);
-                if (user.getPw().equals(pw)) {
-                    System.out.println("로그인 되었습니다!");
-                } else {
-                    System.out.println("비밀번호가 다릅니다.");
-                }
-            }
-        }
-        // 방법 3
+        new Main();
     }
+    private final Scanner sc;
+    User user = null;
+
+    private Main(){
+        sc = new Scanner(System.in);
+        while(true) {
+            printMenu();
+        }
+    }
+
+    private void printMenu() {
+        if(user == null) {
+            System.out.println("1. 로그인");
+            System.out.println("2. 회원가입");
+            System.out.print("선택: ");
+        } else {
+            System.out.println("1. 로그아웃");
+            System.out.println("2. 회원 탈퇴");
+        }
+        try {
+            int select = sc.nextInt();
+            // 오류가 없는 구역
+            switch (select){
+                case 1 :
+                    if(user==null)login();
+                    else logout();
+                    break;
+                case 2 :
+                    if(user==null)register();
+                    else unregister();
+                    break;
+                default :
+                    System.out.println("잘못된 메뉴입니다.");
+                    break;
+            }
+
+        }catch(InputMismatchException exception){
+            System.out.println("숫자를 입력하세요!!");
+        }
+
+    }
+    // 로그인 성공하면 멤버 변수 user에 해당 유저 대입
+    private void login(){}
+
+    // 멤버 변수의 user를 null값으로 대입
+    private void register(){}
+
+    // 회원가입 할 때, 비밀번호를 두 번 입력받음
+    private void logout() {}
+
+    // 회원 탈퇴인데, 비밀번호를 입력받고 멤버변수의 user의 비밀번호와 일치하면 탈퇴시킴
+    private void unregister() {}
 }
