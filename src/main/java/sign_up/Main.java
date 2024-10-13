@@ -75,19 +75,41 @@ import java.util.Scanner;
         }
     }
 
+    // 회원가입 할 때, 비밀번호를 두 번 입력받음
+    private void register() {
+            System.out.println("id: ");
+            String id = sc.next();
+        while (true) {
+            System.out.print("pw: ");
+            String pw1 = sc.next();
+            System.out.println("pw를 한번 더 입력하세요!");
+            System.out.print("pw: ");
+            String pw2 = sc.next();
+            if (pw1.equals(pw2)) {
+                manager.register(id, pw1);
+                System.out.println("회원이 등록되었습니다!!");
+                break;
+            } else {
+                System.out.println("입력하신 비밀번호가 서로 다릅니다!");
+            }
+        }
+    }
     // 멤버 변수의 user를 null값으로 대입
-    private void register(){
-        System.out.println("id: ");
-        String id = sc.next();
-        System.out.print("pw: ");
-        String pw = sc.next();
-        manager.register(id,pw);
-        System.out.println("회원이 등록되었습니다!!");
+    private void logout() {
+        user = null;
+        System.out.println("로그아웃 되었습니다!");
     }
 
-    // 회원가입 할 때, 비밀번호를 두 번 입력받음
-    private void logout() {}
-
     // 회원 탈퇴인데, 비밀번호를 입력받고 멤버변수의 user의 비밀번호와 일치하면 탈퇴시킴
-    private void unregister() {}
+    private void unregister() {
+        System.out.println("pw : ");
+        String pw = sc.next();
+        if(pw.equals(user.getPw())){
+            manager.unregister(user);
+            user=null;
+            System.out.println("회원 탈퇴되었습니다.");
+        }else{
+            System.out.println("비밀번호가 일치하지 않습니다.");
+        }
+    }
 }
